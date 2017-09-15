@@ -28,11 +28,21 @@ public class Node {
 
     public static Node createLink(int length){
         //链表初始化
-        Node pHead = new Node(0);
         Random random = new Random();
+        int[] items = new int[length];
         //头插
         for(int i = 0; i < length; i++){
-            Node pNext = new Node(Math.abs(random.nextInt() % 10));
+            items[i] = Math.abs(random.nextInt() % 10);
+        }
+        return Node.createLink(items);
+    }
+
+    public static Node createLink(int[] items)
+    {
+        Node pHead = new Node(0);
+        //头插
+        for(int i = 0; i < items.length; i++){
+            Node pNext = new Node(items[i]);
             pNext.setNext(pHead.getNext());
             pHead.setNext(pNext);
         }
@@ -54,5 +64,15 @@ public class Node {
             pHead = null;
             pHead = next;
         }
+    }
+
+    public static int calcLength(Node pHead){
+        int length = 0;
+        Node pNode = pHead.getNext();
+        while (pNode != null){
+            length ++;
+            pNode = pNode.getNext();
+        }
+        return length;
     }
 }
